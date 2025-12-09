@@ -1,0 +1,50 @@
+Car4Cra/
+│
+├── config/
+│   ├── packages/
+│   ├── routes/
+│   └── services.yaml
+│
+├── public/
+│   ├── index.php
+│   └── assets/
+│
+├── src/
+│   ├── Controller/
+│   │   ├── SecurityController.php
+│   │   ├── CarController.php
+│   │   ├── BookingController.php
+│   │   └── UserController.php
+│   │
+│   ├── Entity/
+│   │   ├── User.php
+│   │   ├── Car.php
+│   │   └── Booking.php
+│   │
+│   ├── Repository/
+│   │   ├── UserRepository.php
+│   │   ├── CarRepository.php
+│   │   └── BookingRepository.php
+│   │
+│   ├── Service/
+│   │   ├── BookingManager.php
+│   │   └── PaymentService.php
+│   │
+│   └── Form/
+│       ├── LoginFormType.php
+│       ├── CarType.php
+│       └── BookingType.php
+│
+├── templates/
+│   ├── base.html.twig
+│   ├── security/login.html.twig
+│   ├── car/
+│   ├── booking/
+│   └── user/
+│
+├── migrations/
+│
+├── tests/
+│
+├── var/
+└── vendor/

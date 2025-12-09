@@ -1,0 +1,3 @@
+symfony new . --webapp
+php bin/console make:user
+php bin/console doctrine:schema:validate

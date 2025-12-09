@@ -1,20 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Welcome to Car4Cra{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container">
+    <div style="text-align: center; padding: 4rem 0;">
+        <h1 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 1.5rem; background: linear-gradient(to right, var(--primary), #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            Drive Your Dreams
+        </h1>
+        <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2.5rem;">
+            Experience the freedom of the open road with our premium selection of vehicles. 
+            Simple booking, transparent pricing, and unforgettable journeys.
+        </p>
+        
+        <div class="d-flex justify-content-center gap-3" style="display: flex; justify-content: center; gap: 1rem;">
+            <a href="{{ path('app_car_index') }}" class="btn btn-primary" style="padding: 0.875rem 2rem; font-size: 1.1rem;">
+                Browse Cars
+            </a>
+            {% if not app.user %}
+                <a href="{{ path('app_register') }}" class="btn btn-outline" style="padding: 0.875rem 2rem; font-size: 1.1rem;">
+                    Create Account
+                </a>
+            {% endif %}
+        </div>
+    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/personal/9raya/fac/3eme_licence/symfony/Car4Cra/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/personal/9raya/fac/3eme_licence/symfony/Car4Cra/templates/home/index.html.twig</code></li>
-    </ul>
+    <div class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem;">
+        <div class="card" style="border: none; background: transparent; box-shadow: none;">
+            <div class="card-body text-center">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🚗</div>
+                <h3 style="margin-bottom: 0.5rem;">Premium Fleet</h3>
+                <p class="text-muted">Choose from a wide range of well-maintained, high-quality vehicles.</p>
+            </div>
+        </div>
+        <div class="card" style="border: none; background: transparent; box-shadow: none;">
+            <div class="card-body text-center">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📅</div>
+                <h3 style="margin-bottom: 0.5rem;">Easy Booking</h3>
+                <p class="text-muted">Book your car in just a few clicks with our intuitive system.</p>
+            </div>
+        </div>
+        <div class="card" style="border: none; background: transparent; box-shadow: none;">
+            <div class="card-body text-center">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🛡️</div>
+                <h3 style="margin-bottom: 0.5rem;">Secure & Safe</h3>
+                <p class="text-muted">Your safety and security are our top priorities.</p>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

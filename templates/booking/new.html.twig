@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book {{ car.make }} {{ car.model }} - Car4Cra{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="auth-container" style="min-height: auto; padding-top: 0;">
+        <div class="auth-card" style="max-width: 600px;">
+            <h1 class="auth-title">Complete Booking</h1>
+            <p class="auth-subtitle">You are booking: <strong>{{ car.make }} {{ car.model }}</strong></p>
+
+            <div class="alert alert-info">
+                Price per day: <strong>${{ car.pricePerDay }}</strong>
+            </div>
+
+            {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.startDate) }}
+                    {{ form_widget(form.startDate) }}
+                    {{ form_errors(form.startDate) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.endDate) }}
+                    {{ form_widget(form.endDate) }}
+                    {{ form_errors(form.endDate) }}
+                </div>
+
+                <button class="btn btn-primary btn-block mt-4">Confirm Booking</button>
+            {{ form_end(form) }}
+
+            <div class="mt-4 text-center" style="margin-top: 1.5rem;">
+                <a href="{{ path('app_car_show', {'id': car.id}) }}">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

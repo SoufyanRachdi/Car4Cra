@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ car.make }} {{ car.model }} - Car4Cra{% endblock %}
+
+{% block body %}
+<div class="container">
+    <a href="{{ path('app_car_index') }}" class="btn btn-outline mb-4" style="margin-bottom: 1.5rem;">&larr; Back to Cars</a>
+
+    <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+        <div class="car-image">
+            {% if car.image %}
+                <img src="{{ car.image }}" alt="{{ car.make }} {{ car.model }}" style="width: 100%; border-radius: 1rem; box-shadow: var(--shadow-lg);">
+            {% else %}
+                <div style="width: 100%; height: 400px; background-color: #e2e8f0; border-radius: 1rem; display: flex; align-items: center; justify-content: center; color: #64748b;">
+                    No Image Available
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="car-details">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">{{ car.make }} {{ car.model }}</h1>
+            <div class="mb-4" style="margin-bottom: 2rem;">
+                <span class="badge {{ car.isAvailable ? 'badge-success' : 'badge-warning' }}" style="font-size: 1rem; padding: 0.5rem 1rem;">
+                    {{ car.isAvailable ? 'Available for Loan' : 'Currently Booked' }}
+                </span>
+            </div>
+
+            <div class="card mb-4" style="margin-bottom: 2rem;">
+                <div class="card-body">
+                    <h3 style="margin-bottom: 1rem;">Details</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+                            <span class="text-muted">Year</span>
+                            <strong>{{ car.year }}</strong>
+                        </li>
+                        <li style="margin-bottom: 0.5rem; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+                            <span class="text-muted">Price Per Day</span>
+                            <strong style="font-size: 1.25rem; color: var(--primary);">${{ car.pricePerDay }}</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            {% if car.isAvailable %}
+                <div class="actions">
+                    <a href="{{ path('app_booking_new', {'id': car.id}) }}" class="btn btn-primary btn-block" style="padding: 1rem; font-size: 1.1rem;">
+                        Book This Car Now
+                    </a>
+                </div>
+            {% else %}
+                <div class="alert alert-warning">
+                    This car is currently not available for booking.
+                </div>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="admin-actions mt-4" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                    <h3>Admin Actions</h3>
+                    <div class="d-flex gap-2" style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="{{ path('app_car_edit', {'id': car.id}) }}" class="btn btn-outline">Edit Car</a>
+                        {{ include('car/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

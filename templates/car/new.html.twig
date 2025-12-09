@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Car - Car4Cra{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="auth-container" style="min-height: auto; padding-top: 0;">
+        <div class="auth-card" style="max-width: 600px;">
+            <h1 class="auth-title">Add New Car</h1>
+            <p class="auth-subtitle">Enter the details of the new car.</p>
+
+            {{ include('car/_form.html.twig') }}
+
+            <div class="mt-4 text-center" style="margin-top: 1.5rem;">
+                <a href="{{ path('app_car_index') }}">Back to list</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

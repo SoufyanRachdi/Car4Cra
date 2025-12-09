@@ -1,0 +1,35 @@
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.make) }}
+        {{ form_widget(form.make) }}
+        {{ form_errors(form.make) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.model) }}
+        {{ form_widget(form.model) }}
+        {{ form_errors(form.model) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.year) }}
+        {{ form_widget(form.year) }}
+        {{ form_errors(form.year) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.pricePerDay) }}
+        {{ form_widget(form.pricePerDay) }}
+        {{ form_errors(form.pricePerDay) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.image) }}
+        {{ form_widget(form.image) }}
+        <small class="text-muted">Enter a URL for the car image.</small>
+        {{ form_errors(form.image) }}
+    </div>
+    <div class="form-group form-check">
+        {{ form_widget(form.isAvailable) }}
+        {{ form_label(form.isAvailable) }}
+        {{ form_errors(form.isAvailable) }}
+    </div>
+
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

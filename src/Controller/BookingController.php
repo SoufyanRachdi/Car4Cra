@@ -67,4 +67,26 @@ class BookingController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/admin/bookings', name: 'admin_booking_index', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function adminBookings(BookingRepository $bookingRepository): Response
+    {
+        return $this->render('booking/admin_index.html.twig', [
+            'bookings' => $bookingRepository->findBy([], ['startDate' => 'DESC']),
+        ]);
+    }
+
+    #[Route('/admin/booking/{id}/delete', name: 'admin_booking_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function adminDelete(Request $request, Booking $booking, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $booking->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($booking);
+            $entityManager->flush();
+            $this->addFlash('success', 'Booking deleted successfully.');
+        }
+
+        return $this->redirectToRoute('admin_booking_index', [], Response::HTTP_SEE_OTHER);
+    }
 }

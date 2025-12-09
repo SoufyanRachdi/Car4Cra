@@ -16,10 +16,18 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class CarController extends AbstractController
 {
     #[Route('/', name: 'app_car_index', methods: ['GET'])]
-    public function index(CarRepository $carRepository): Response
+    public function index(Request $request, CarRepository $carRepository): Response
     {
+        $sort = $request->query->get('sort', 'id');
+        $direction = $request->query->get('direction', 'ASC');
+
+        // whitelist sortable fields
+        if (!in_array($sort, ['pricePerDay', 'year', 'make', 'model', 'id'])) {
+            $sort = 'id';
+        }
+
         return $this->render('car/index.html.twig', [
-            'cars' => $carRepository->findAll(),
+            'cars' => $carRepository->findBy([], [$sort => $direction]),
         ]);
     }
 

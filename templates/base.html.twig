@@ -23,6 +23,9 @@
                     <a href="{{ path('app_home') }}" class="nav-link">Home</a>
                     <a href="{{ path('app_car_index') }}" class="nav-link">Cars</a>
                     {% if app.user %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('admin_booking_index') }}" class="nav-link">Manage Bookings</a>
+                        {% endif %}
                         <a href="{{ path('app_booking_my') }}" class="nav-link">My Bookings</a>
                         <div class="nav-user">
                             <span class="user-email">{{ app.user.email }}</span>

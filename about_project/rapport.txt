@@ -1,0 +1,72 @@
+Rapport de Construction du Projet : Car4Cra
+1. Initialisation du Projet
+Creation of the Symfony project with webapp dependencies (Twig, Database, etc.).
+
+bash
+composer create-project symfony/skeleton:"8.0.*" Car4Cra
+cd Car4Cra
+composer require webapp
+2. Création de l'Entité User & Authentification
+Setting up the User entity and the registration/login system.
+
+bash
+# 1. Create the User entity
+php bin/console make:user
+# Answers:
+# - The name of the security user class (e.g. User) [User]: User
+# - Do you want to store user data in the database (via Doctrine)? (yes/no) [yes]: yes
+# - The property name that identifies this user (e.g. email) [email]: email
+# - Does this app need to hash/check user passwords? (yes/no) [yes]: yes
+# 2. Create the Registration Form
+php bin/console make:registration-form
+# Answers:
+# - Creating a registration form for User class
+# - Do you want to add a @UniqueEntity validation annotation on your User class to make sure duplicate accounts aren't created? (yes/no) [yes]: yes
+# - Do you want to send an email to verify the user's email address after registration? (yes/no) [yes]: no
+# - Do you want to automatically authenticate the user after registration? (yes/no) [yes]: yes
+# 3. Create the Login Form (SecurityController)
+php bin/console make:security:form-login
+3. Création des Entités (Entities)
+Creation of the data models for Cars and Bookings.
+
+Entité: Car
+bash
+php bin/console make:entity Car
+# Fields added:
+# make (string, 255)
+# model (string, 255)
+# year (integer)
+# pricePerDay (decimal, precision: 10, scale: 2)
+# image (string, 255, nullable)
+# isAvailable (boolean)
+Entité: Booking
+bash
+php bin/console make:entity Booking
+# Fields added:
+# startDate (datetime)
+# endDate (datetime)
+# totalPrice (decimal, precision: 10, scale: 2)
+# status (string, 255) -> default 'pending'
+# Relations:
+# user (relation -> ManyToOne -> User)
+# car (relation -> ManyToOne -> Car)
+4. Création des Contrôleurs & CRUD
+Generating the controllers and forms to manage the entities.
+
+bash
+# CRUD for Car (CarController + CarType)
+php bin/console make:crud Car
+# CRUD for Booking (BookingController + BookingType)
+php bin/console make:crud Booking
+# Generic Home Controller
+php bin/console make:controller HomeController
+5. Base de Données
+Applying the changes to the database.
+
+bash
+# Create the migration file
+php bin/console make:migration
+# Execute the migration inside the database
+php bin/console doctrine:migrations:migrate
+Résumé de la Structure
+Entities: User, Car, Booking

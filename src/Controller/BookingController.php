@@ -82,6 +82,12 @@ class BookingController extends AbstractController
     public function adminDelete(Request $request, Booking $booking, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $booking->getId(), $request->request->get('_token'))) {
+            // Make the car available again
+            $car = $booking->getCar();
+            if ($car) {
+                $car->setIsAvailable(true);
+            }
+
             $entityManager->remove($booking);
             $entityManager->flush();
             $this->addFlash('success', 'Booking deleted successfully.');

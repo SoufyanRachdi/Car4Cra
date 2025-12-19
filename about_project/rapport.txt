@@ -3,9 +3,8 @@ Rapport de Construction du Projet : Car4Cra
 Creation of the Symfony project with webapp dependencies (Twig, Database, etc.).
 
 bash
-composer create-project symfony/skeleton:"8.0.*" Car4Cra
+Symfony create . --webapp
 cd Car4Cra
-composer require webapp
 2. Création de l'Entité User & Authentification
 Setting up the User entity and the registration/login system.
 
